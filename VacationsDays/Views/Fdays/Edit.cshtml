@@ -1,0 +1,79 @@
+﻿@model Vacation
+
+<form method="post" asp-action="Edit">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit Vacation</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="mb-3">
+			<label asp-for="Name"></label>
+			<input asp-for="Name" class="form-control" />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="UserId"></label>
+			<input asp-for="UserId" class="form-control" />
+			<span asp-validation-for="UserId" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Date_Time"></label>
+			<input asp-for="Date_Time" class="form-control" />
+			<span asp-validation-for="Date_Time" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="RemainingDays"></label>
+			<input asp-for="RemainingDays" class="form-control" readonly />
+			<span asp-validation-for="RemainingDays" class="text-danger"></span>
+		</div>
+        <div class="mb-3">
+            <label asp-for="TotalDays"></label>
+            <input asp-for="TotalDays" class="form-control" readonly />
+            <span asp-validation-for="TotalDays" class="text-danger"></span>
+        </div>
+		<div class="mb-3">
+			<label asp-for="BookedDays"></label>
+			<input asp-for="BookedDays" class="form-control" readonly />
+			<span asp-validation-for="BookedDays" class="text-danger"></span>
+		</div>
+		
+		<div class="mb-3">
+			<label asp-for="ChDays"></label>
+			<input asp-for="ChDays" class="form-control" />
+			<span asp-validation-for="ChDays" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="VacTotalDays"></label>
+			<input asp-for="VacTotalDays" class="form-control" readonly/>
+			<span asp-validation-for="VacTotalDays" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="LegalVacYearBef"></label>
+			<input asp-for="LegalVacYearBef" class="form-control" />
+			<span asp-validation-for="LegalVacYearBefH2" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="LegalVacYearBefH2"></label>
+			<input asp-for="LegalVacYearBefH2" class="form-control" />
+			<span asp-validation-for="LegalVacYearBefH2" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="LegalVacYear"></label>
+			<input asp-for="LegalVacYear" class="form-control" />
+			<span asp-validation-for="LegalVacYear" class="text-danger"></span>
+		</div>
+		
+		<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+		<a asp-controller="Fdays" asp-action="IndexGlobal" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
+

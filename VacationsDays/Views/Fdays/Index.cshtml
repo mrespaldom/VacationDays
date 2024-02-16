@@ -1,0 +1,329 @@
+﻿
+
+@using Newtonsoft.Json
+
+
+@model IEnumerable<Vacation>
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+<style>
+    media screen and (max-width: 768px) {
+        table
+        
+    {
+        font-size: 10px;
+    }
+
+    .table td {
+        flex: 0 0 auto;
+        max-width: 100%;
+    }
+
+        .table td div input[type="checkbox"] {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+    tr td input[type="checkbox"] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 17px;
+        text-align: center;
+        align-items: center;
+        min-width: 5px;
+        max-width: 5px;
+    }
+
+    /* Estilo geral para o corpo da tabela */
+    table {
+        font-size: 11px; /* Tamaño da fonte  */
+    }
+       
+
+</style>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Vacations days</h2>
+		</div>
+        <div class="col-6 text-end">
+            <a asp-controller="Fdays" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New User
+            </a>
+
+		</div>
+        <div class="table-container">
+            <table class="table table-bordered table-striped" style="width:100%">
+                
+            </table>
+        </div>
+    </div>
+    <br /><br />
+
+ 
+<div class="table-container;  style="overflow-x: auto;">
+<form method="post" asp-action="CreateWithSelectedDays" id="vacationForm">
+<table class="" >  
+        <thead style="position: sticky; top: 0; background-color: #ffffff; z-index: 1;">
+
+            <tr >
+                <td style="background-color: #E5E5E5; font-size:medium; "><strong>Names</strong></td>
+                @foreach (var obj in Model)
+                {
+                    <th style="background-color: #325d88; font-style:inherit;  color:white; font-size:small; text-align:center;">@obj.Name</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            <tr >
+                <td style="background-color: #E5E5E5; font-size: small; "><strong>Date</strong></td>
+                    @foreach (var obj in Model)
+                    {
+                        <td style="background-color: #E5E5E5;  font-size:small; text-align:center">@obj.Date_Time.Year<br>/@obj.Date_Time.Month/@obj.Date_Time.Day
+                        </td>
+                    }
+            </tr>
+
+             <tr>
+                 <td style="background-color: #F5F5F5; font-size: small; "><strong>User ID</strong></td>
+                 @foreach (var obj in Model)
+                 {
+                  <td style="background-color: #F5F5F5; font-size: small; text-align:center;"><br />@obj.UserId <br /><br /></td>                 }
+              </tr>
+
+             <tr>
+                 <td style="background-color: #E5E5E5; font-size: small;"><strong>Company Holidays</strong></td>
+                 @foreach (var obj in Model)
+                 {
+                    <td style="background-color: #E5E5E5; text-align:center; font-size: small;">@obj.ChDays</td>
+                 }
+             </tr>
+
+             <tr>
+                 <td style="background-color: #F5F5F5;  font-size: small;"><strong>Legal Vacation 2023</strong></td>
+                 @foreach (var obj in Model)
+                 {
+                   <td style="background-color: #F5F5F5; text-align:center; font-size: small;">@obj.LegalVacYearBef</td>
+                 }
+             </tr>
+             <tr>
+                 <td style="background-color: #E5E5E5;  font-size: small;"><strong>Legal Vacation 2023 H2</strong></td>
+                    @foreach (var obj in Model)
+                    {
+                     <td style="background-color: #E5E5E5; text-align:center; font-size: small;">@obj.LegalVacYearBefH2</td>
+                    }
+            </tr>
+            <tr> 
+                <td style="background-color: #F5F5F5;  font-size: small;"><strong>Legal Vacation 2024</strong></td>
+                @foreach (var obj in Model)
+                {
+                    <td style="background-color: #F5F5F5; text-align:center; font-size: small;">@obj.LegalVacYear</td>
+                }
+            </tr> 
+            <tr>
+                <td style="background-color: #E5E5E5; font-size: small;"><strong>Booked<br /> Days</strong></td>
+                @foreach (var obj in Model)
+                {
+                    <td style="background-color: #E5E5E5; text-align:center; font-size: small;">@obj.BookedDays</td>
+                }
+            </tr> 
+            <tr>
+                <td style="background-color: #F5F5F5;  font-size: small;"><strong>2024 Total<br /> Days</strong></td>
+                @foreach (var obj in Model)
+                {
+                    <td style="background-color: #F5F5F5; text-align:center; font-size: small;">@obj.TotalDays <br /></td>
+                }
+            </tr>
+            <tr>
+                <td style="background-color: #E5E5E5;  font-size: small;"><strong>Remaining <br /> Days</strong></td>
+                @foreach (var obj in Model)
+                {
+                    <td style="background-color: #E5E5E5; text-align:center; font-size: small;">@obj.RemainingDays</td>
+                }
+            </tr>
+            <tr>
+                         
+                        <!-- Encabezado da tabela -->
+                <thead>
+                    <tr>
+                        <th style="background-color: #E5E5E5; font-size: medium; ">Selected Days </th>
+                                @foreach (var obj in Model)
+                                {
+                            <th style="background-color: #325d88;">   </th>
+                                }
+                    </tr>
+                </thead>
+
+                <!-- Corpo da  tabela -->
+                <tbody>
+                @for (int month = 1; month <= 12; month++)
+                {
+                                        DateTime currentDate = new DateTime(2024, month, 1);
+                                        string monthName = currentDate.ToString("MMMM");
+
+                                        string colorCell1 = "#B3FFB3";
+                                        string colorCell2 = "#E6FFE6";
+
+                                       switch(monthName) {
+                                            case "janeiro":
+                                                colorCell1 = "#E6F7FF";
+                                                colorCell2 = "#B3E6FF";
+                                                break;
+                                            case "fevereiro":
+                                                colorCell1 = "#FFFFE6";
+                                                colorCell2 = "#FFFF4D";
+                                                break;
+                                            case "março":
+                                                colorCell1 = "#F1F1F1";
+                                                colorCell2 = "#E1E1E1";
+                                                break;
+                                            case "abril":
+                                                colorCell1 = "#B2DFEE";
+                                                colorCell2 = "#E0FFFF";
+                                                break;
+                                            case "maio":
+                                                colorCell1 = "#FFB6C1";
+                                                colorCell2 = "#FFC0CB";
+                                                break;
+                                            case "junho":
+                                                colorCell1 = "#ADD8E6";
+                                                colorCell2 = "#87CEEB";
+                                                break;
+                                            case "julho":
+                                                colorCell1 = "#90EE90"; // Verde claro
+                                                colorCell2 = "#00FF50"; // Verde vivo
+                                                break;
+                                            case "agosto":
+                                                colorCell1 = "#FFD510"; // Dorado
+                                                colorCell2 = "#FFD590"; // Naranja oscuro
+                                                break;
+                                            case "setembro":
+                                                colorCell1 = "#F78DB1"; // Rosa palo
+                                                colorCell2 = "#F76DD1"; // Rosa oscuro
+                                                break;
+                                            case "outubro":
+                                                colorCell1 = "#C0C0FA"; // Lavanda claro
+                                                colorCell2 = "#E6E6FA"; // Lavanda oscuro
+                                                break;
+                                            case "novembro":
+                                                colorCell1 = "#8A4BH9"; // Lila 
+                                                colorCell2 = "#E5B4F3"; // Lila 
+                                                break;
+                                            case "dezembro":
+                                                colorCell1 = "#FE70CB"; // Rosa palo
+                                                colorCell2 = "#FEB1C3"; // Rosa oscuro
+                                                break;
+                                            default:
+                                                colorCell1 = "#CCCCCC";
+                                                colorCell2 = "#EEEEEE";
+                                                break;
+                                        }
+                                    
+                     <tr style="background-color: @(month % 2 == 0 ? colorCell1 : colorCell2) !important;">
+
+                            <!-- Month name -->
+                            <td>
+                            <strong>@monthName</strong>
+                            </td>
+
+                            @foreach (var obj in Model)
+                            {
+                                        <!-- For each person, beside the month name, empty cells -->
+                                        <td>&nbsp;</td>            
+                            }
+
+                    </tr>
+
+                            @for (int day = 1; day <= DateTime.DaysInMonth(2024, month); day++)
+                            {   
+
+                                    DateTime currentDay = new DateTime(2024, month, day);
+                                    string dayLabel = $"{day} {char.ToUpper(currentDay.ToString("ddd")[0])}{currentDay.ToString("ddd").Substring(1, 2).ToLower()}";
+
+                                    <tr style="font-size: small; background-color: @(day % 2 == 0 ? colorCell1 : colorCell2) !important;">
+                                        <td>
+                                            <div id="@dayLabel.ToString()">
+                                                @dayLabel.ToString()
+                                            </div>
+                                        </td>                                                            
+
+                                    @foreach (var obj in Model)
+                                    {                                      
+                                          
+                                                        string checkboxId = $"{obj.Id}-{obj.Date_Time.Year}-{month}-{day}";
+                                                            <td align="center">
+                                                             <div class="text-center">
+                                                                 <div style="font-size:12px; display: inline-block; align-content:center; " >
+                                                                    <input type="checkbox" class="form-check-input" name="selectedDays-@obj.Id-@obj.Date_Time.Year-@month-@day" id="@($"{checkboxId}-V")" value="V" @( ( (obj.SelectedDays ?? 0) & 1 ) != 0 ? "checked" : "") onchange="updateSelectedDays(this);" />
+                                                                    <label class="form-check-label" for="@($"{checkboxId}-V")">V</label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div style="display: inline-block; align-content:center;">
+                                                                <div style="font-size:12px;">
+                                                                    <input type="checkbox" class="form-check-input" name="selectedDays-@obj.Id-@obj.Date_Time.Year-@month-@day" id="@($"{checkboxId}-CH")" value="CH" @( ( (obj.SelectedDays ?? 0) & 2 ) != 0 ? "checked" : "") onchange="updateSelectedDays(this);" />
+                                                                    <label class="form-check-label" for="@($"{checkboxId}-CH")">C</label>
+                                                                </div>
+                                                            </div>
+
+                                                            </td>                                        
+                                            
+                                     }                       
+                                  </tr>   
+                            }       
+                }
+        </tbody>
+
+ </table>
+    
+        <button type="submit" onclick="submitForm()">Enviar</button>
+           
+        
+ </form>
+    <script> 
+            function updateSelectedDays(checkbox) {
+                var checkboxId = checkbox.id;
+                var otherCheckboxId = checkboxId.endsWith("-V") ? checkboxId.replace("-V", "-CH") : checkboxId.replace("-CH", "-V");
+                var otherCheckbox = document.getElementById(otherCheckboxId);
+    
+                if (checkbox.checked) {
+                    if (otherCheckbox.checked) {
+                        otherCheckbox.checked = false;
+                    }
+                }
+            }
+
+            const selectedDays = document.querySelectorAll('input[type="checkbox"][name^="selectedDays-"]');
+                const selectedDaysData = [];
+
+                for (const checkbox of selectedDays) {
+                  if (checkbox.checked) {
+                    selectedDaysData.push({
+                      userId: checkbox.name.split('-')[1],
+                      day: checkbox.value,
+                    });
+                  }
+                }
+           
+    </script>
+</div>
+    
+</div>
+

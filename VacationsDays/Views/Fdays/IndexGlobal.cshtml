@@ -1,0 +1,138 @@
+﻿@model IEnumerable<Vacation>
+@{
+    ViewData["Title"] = "Global";
+}
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Vacations days</h2>
+		</div>
+        <div class="col-6 text-end">
+            <a asp-controller="Fdays" asp-action="Create2" class="btn btn-primary">
+               <i class="bi bi-plus-circle"></i> &nbsp; Create New User
+			</a>
+		</div>
+    </div>
+    <br /><br />
+
+  
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size:12px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+        .table td {
+            flex-wrap: nowrap;
+        }
+
+       
+            .table .btn-group .btn {
+                padding: 1px;
+            }
+
+</style>
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr style="position: sticky; top: 0; background-color: #ffffff; z-index: 1;">
+                 <th style="text-align: left; font-size: large">
+                   Name<br />
+			    </th>
+                <th style="text-align:center; font-size: medium">
+                    User ID
+		    	</th>
+                <th style="text-align:center">
+                    Remaining Days
+                </th>
+                <th style="text-align:center">
+                    Total days 2024
+                </th>
+                <th style="text-align:center">
+                    Booked days
+                </th>
+                <th style="text-align:center">
+                    Company Holiday days
+                </th>
+                <th style="text-align:center">
+                    Total Days of Vacation
+                </th>
+                <th style="text-align:center">
+                    Legal Vacation 2023
+                </th>
+                <th style="text-align:center">
+                    Legal Vacation 2023 H2
+                </th>
+                <th style="text-align:center">
+                    Legal Vacation 2024
+                </th>
+                <th style="text-align:center; font-size: medium" >
+                    Date
+                </th>
+                <th></th>
+		    </tr>
+	    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                     <td width="20%">
+                       <br />@obj.Name
+		    		</td>
+                     <td width="8%" >
+                        <br>@obj.UserId
+                    </td> 
+                    <td width="8%" style="text-align:center">
+                        <br />@obj.RemainingDays
+                    </td>
+                    <td width="8%" style="text-align:center">
+                        <br />@obj.TotalDays
+                    </td>
+                    <td width="8%" style="text-align:center">
+                        <br />@obj.BookedDays
+                    </td>
+                    <td width="8%" style="text-align:center">
+                        <br />@obj.ChDays
+                    </td>
+                    <td width="8%" style="text-align:center">
+                        <br />@obj.VacTotalDays
+                    </td>
+                    <td width="8%" style="text-align:center">
+                        <br />@obj.LegalVacYearBef
+                    </td>
+                    <td width="8%" style="text-align:center">
+                        <br />@obj.LegalVacYearBefH2
+                    </td>
+                    <td width="8%" style="text-align:center">
+                        <br />@obj.LegalVacYear
+                    </td>
+                    <td width="8%">
+                        <br />@obj.Date_Time.Day/@obj.Date_Time.Month/@obj.Date_Time.Year
+                    </td>
+
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Fdays" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>Edit</a>
+                            <a asp-controller="Fdays" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i>Delete</a>
+                         </div>
+                    </td>
+			</tr>
+        }
+    </tbody>
+    </table>
+
+
+
+</div>

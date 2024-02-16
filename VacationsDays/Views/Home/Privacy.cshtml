@@ -1,0 +1,132 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+@model IEnumerable<Vacation>
+
+@* <!-- Mostrar información del usuario -->
+<h2>User ID: @Model.UserId</h2>
+<h3>Remaining Days: @Model.RemainingDays</h3>
+<h3>Total Days: @Model.TotalDays</h3>
+<!-- Otras variables... -->
+<!-- Mostrar tabla de días de los meses -->
+<table border="1">
+    <thead>
+        <tr>
+            <th></th>
+            @foreach (var month in Model.Months)
+            {
+                <th>@month</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dayType in Model.DayTypes)
+        {
+            <tr>
+                <td>@dayType</td>
+                @foreach (var month in Model.Months)
+                {
+                    <td>
+                        <input type="checkbox" name="blockedDays[@Model.UserId][@month]" />
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table> *@
+
+
+@* @model IEnumerable<Vacation>
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th></th>
+            @foreach (var obj in Model)
+            {
+                <th>@obj.Name</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Remaining Days</td>
+            @foreach (var obj in Model)
+            {
+                <td>@obj.RemainingDays</td>
+            }
+        </tr>
+        <tr>
+            <td>2024 Total Days</td>
+            @foreach (var obj in Model)
+            {
+                <td>@obj.Totaldays</td>
+            }
+        </tr>
+        <tr>
+            <td>Booked Days</td>
+            @foreach (var obj in Model)
+            {
+                <td>@obj.BookedDays</td>
+            }
+        </tr>
+        <tr>
+            <td>Company Holidays</td>
+            @foreach (var Vacation in Model)
+            {
+                <td>@Vacation.ChDays</td>
+            }
+        </tr>
+        <tr>
+            <td>Vacation Total Days</td>
+            @foreach (var Vacation in Model)
+            {
+                <td>@Vacation.VacTotalDays</td>
+            }
+        </tr>
+        <tr>
+            <td>Legal Vacation 2023</td>
+            @foreach (var Vacation in Model)
+            {
+                <td>@Vacation.LegalVacYearBef</td>
+            }
+        </tr>
+        <tr>
+            <td>Legal Vacation 2023 H2</td>
+            @foreach (var Vacation in Model)
+            {
+                <td>@Vacation.LegalVacYearBefH2</td>
+            }
+        </tr>
+        <tr>
+            <td>Legal Vacation 2024</td>
+            @foreach (var Vacation in Model)
+            {
+                <td>@Vacation.LegalVacYear</td>
+            }
+        </tr>
+    </tbody>
+</table>
+ *@
