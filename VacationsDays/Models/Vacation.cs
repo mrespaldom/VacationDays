@@ -61,9 +61,7 @@ namespace VacationsDays.Models
 
         public string? BlokedJson { get; set; }
 
-       
-
-
+        
     }
    
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xv7YvsMzfCARh0aPUHALdD2zESfwRcVI7kI2sMb7gmsggSL5pIrPKMgQ3CJ+DoOQHzeykv83IotG6BuTCl33Cg==",
+  "dgSpecHash": "Ci7wZ01qPQtDS/1yGyvkSoin7YIoieAvCuz4gfUBRGroarC4XOLp/E0jjnfEB2Xq9yp/HhzsA+RoyoazZThezQ==",
   "success": true,
   "projectFilePath": "C:\\Temp\\Proyects\\VacationsDays5Adaptor\\VacationsDays\\VacationsDays.csproj",
   "expectedPackageFiles": [
@@ -51,7 +51,11 @@
     "C:\\Users\\Augustin.Valente\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0\\system.text.encoding.codepages.4.7.0.nupkg.sha512",
     "C:\\Users\\Augustin.Valente\\.nuget\\packages\\system.text.encodings.web\\4.7.2\\system.text.encodings.web.4.7.2.nupkg.sha512",
     "C:\\Users\\Augustin.Valente\\.nuget\\packages\\system.text.json\\4.6.0\\system.text.json.4.6.0.nupkg.sha512",
-    "C:\\Users\\Augustin.Valente\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
+    "C:\\Users\\Augustin.Valente\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
+    "C:\\Users\\Augustin.Valente\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.27\\microsoft.windowsdesktop.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Augustin.Valente\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.27\\microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Augustin.Valente\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.27\\microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Augustin.Valente\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.27\\microsoft.netcore.app.host.win-x64.6.0.27.nupkg.sha512"
   ],
   "logs": []
 }

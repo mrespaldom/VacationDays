@@ -83,8 +83,12 @@
 <table class="" >  
         <thead style="position: sticky; top: 0; background-color: #ffffff; z-index: 1;">
 
-            <tr >
-                <td style="background-color: #E5E5E5; font-size:medium; "><strong>Names</strong></td>
+             <tr>
+
+                        <td style="background-color: #E5E5E5; font-size:medium;">
+                            <button type="submit" onclick="submitForm()" style="background-color: #B2DFEE; color: blue; font-family: Arial, sans-serif; font-size: 14px; padding: 10px 20px; border: none; cursor: pointer;"><strong>SEND➡️</strong></button>
+                            
+                        </td>
                 @foreach (var obj in Model)
                 {
                     <th style="background-color: #325d88; font-style:inherit;  color:white; font-size:small; text-align:center;">@obj.Name</th>
@@ -265,44 +269,126 @@
                                         </td>                                                            
 
                                     @foreach (var obj in Model)
-                                    {                                      
-                                          
-                                                        string checkboxId = $"{obj.Id}-{obj.Date_Time.Year}-{month}-{day}";
-                                                            <td align="center">
-                                                             <div class="text-center">
-                                                                 <div style="font-size:12px; display: inline-block; align-content:center; " >
-                                                                    <input type="checkbox" class="form-check-input" name="selectedDays-@obj.Id-@obj.Date_Time.Year-@month-@day" id="@($"{checkboxId}-V")" value="V" @( ( (obj.SelectedDays ?? 0) & 1 ) != 0 ? "checked" : "") onchange="updateSelectedDays(this);" />
-                                                                    <label class="form-check-label" for="@($"{checkboxId}-V")">V</label>
-                                                                </div>
-                                                            </div>
+                                    {
+                                           
+                                                string checkboxId = $"{obj.Id}-{obj.Date_Time.Year}-{month}-{day}";
+                                                bool isCheckedV = ((obj.SelectedDays ?? 0) & 1) != 0; // Verificar si está marcado como "V"
+                                                bool isCheckedCH = ((obj.SelectedDays ?? 0) & 2) != 0; // Verificar si está marcado como "CH"
 
-                                                            <div style="display: inline-block; align-content:center;">
-                                                                <div style="font-size:12px;">
-                                                                    <input type="checkbox" class="form-check-input" name="selectedDays-@obj.Id-@obj.Date_Time.Year-@month-@day" id="@($"{checkboxId}-CH")" value="CH" @( ( (obj.SelectedDays ?? 0) & 2 ) != 0 ? "checked" : "") onchange="updateSelectedDays(this);" />
-                                                                    <label class="form-check-label" for="@($"{checkboxId}-CH")">C</label>
-                                                                </div>
-                                                            </div>
 
-                                                            </td>                                        
-                                            
-                                     }                       
+                                        <td align="center">
+                                            <div class="text-center">
+                                                <div style="font-size:12px; display: inline-block; align-content:center; ">
+                                                    <input type="checkbox" class="form-check-input" name="selectedDays-@obj.Id-@obj.Date_Time.Year-@month-@day" id="@($"{checkboxId}-V")" value="V" @(isCheckedV ? "checked" : "") onchange="updateSelectedDays(this);" />
+                                                    <label class="form-check-label" for="@($"{checkboxId}-V")">V</label>
+                                                </div>
+                                            </div>
+
+                                            <div style="display: inline-block; align-content:center;">
+                                                <div style="font-size:12px;">
+                                                    <input type="checkbox" class="form-check-input" name="selectedDays-@obj.Id-@obj.Date_Time.Year-@month-@day" id="@($"{checkboxId}-CH")" value="CH" @(isCheckedCH ? "checked" : "") onchange="updateSelectedDays(this);" />
+                                                    <label class="form-check-label" for="@($"{checkboxId}-CH")">C</label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                     }
+
+
+                                                            
                                   </tr>   
                             }       
                 }
-        </tbody>
-
- </table>
-    
-        <button type="submit" onclick="submitForm()">Enviar</button>
-           
+  </table> 
+       @*<button type="submit" onclick="submitForm()">Enviar</button>*@
+        </form> 
         
- </form>
-    <script> 
+        <script> 
+            
+            
+            function initializeSelectedCheckboxes() {
+                const userId = document.getElementById('currentUserId').value;
+                fetch(`/GetSelectedDays/${userId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const selectedDays = data;
+                        for (const day of selectedDays) {
+                            const checkboxId = `${userId}-${day}`;
+                            const checkbox = document.getElementById(checkboxId);
+                            if (checkbox) {
+                                checkbox.checked = true;
+                            }
+                        }
+                    });
+            }
+           
+
+                    function updateSelectedDays(checkbox) {
+                        var checkboxId = checkbox.id;
+                        var otherCheckboxId = checkboxId.endsWith("-V") ? checkboxId.replace("-V", "-CH") : checkboxId.replace("-CH", "-V");
+                        var otherCheckbox = document.getElementById(otherCheckboxId);
+
+                        if (checkbox.checked) {
+                            if (otherCheckbox.checked) {
+                                otherCheckbox.checked = false;
+                            }
+                        }
+                    }
+
+                    const selectedDays = document.querySelectorAll('input[type="checkbox"][name^="selectedDays-"]');
+                    const selectedDaysData = [];
+
+                    for (const checkbox of selectedDays) {
+                        if (checkbox.checked) {
+                    selectedDaysData.push({
+                        userId: userId,
+                        day: checkbox.value // Aquí revisa si deberías obtener `day` de otra forma
+                    });
+                        }
+                    }
+
+        </script>
+        <script>
+            function submitForm() {
+                const selectedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                const selectedDaysData = [];
+
+                selectedCheckboxes.forEach(function (checkbox) {
+                    const userId = checkbox.name.split('-')[1];
+                    const day = checkbox.name.split('-')[4]; // Obtener el día desde el nombre del checkbox
+                    selectedDaysData.push({
+                        userId: userId,
+                        day: day
+                    });
+                });
+
+                // Convertir los datos a formato JSON
+                const jsonData = JSON.stringify(selectedDaysData);
+
+                // Realizar la petición AJAX
+                fetch('/CreateWithSelectedDays', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: jsonData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Respuesta del servidor:', data);
+                        // Manejar la respuesta del servidor si es necesario
+                    })
+                    .catch(error => {
+                        console.error('Error al enviar la solicitud:', error);
+                        // Manejar el error si ocurre
+                    });
+            }
+        </script>
+       @*  <script>
             function updateSelectedDays(checkbox) {
                 var checkboxId = checkbox.id;
                 var otherCheckboxId = checkboxId.endsWith("-V") ? checkboxId.replace("-V", "-CH") : checkboxId.replace("-CH", "-V");
                 var otherCheckbox = document.getElementById(otherCheckboxId);
-    
+
                 if (checkbox.checked) {
                     if (otherCheckbox.checked) {
                         otherCheckbox.checked = false;
@@ -310,19 +396,69 @@
                 }
             }
 
-            const selectedDays = document.querySelectorAll('input[type="checkbox"][name^="selectedDays-"]');
+            // Función para inicializar los checkboxes marcados con anterioridad
+            function initializeSelectedCheckboxes() {
+                const selectedDays = document.querySelectorAll('input[type="checkbox"][name^="selectedDays-"]');
                 const selectedDaysData = [];
 
-                for (const checkbox of selectedDays) {
-                  if (checkbox.checked) {
+                selectedDays.forEach(function (checkbox) {
+                    if (checkbox.checked) {
+                        const userId = checkbox.name.split('-')[1];
+                        const day = checkbox.name.split('-')[4];
+                        selectedDaysData.push({
+                            userId: userId,
+                            day: day
+                        });
+                    }
+                });
+            }
+
+            // Esta función se ejecuta cuando se carga la página
+            document.addEventListener('DOMContentLoaded', function () {
+                initializeSelectedCheckboxes();
+            });
+
+            function submitForm() {
+                const selectedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                const selectedDaysData = [];
+
+                selectedCheckboxes.forEach(function (checkbox) {
+                    const userId = checkbox.name.split('-')[1];
+                    const day = checkbox.name.split('-')[4]; // Obtener el día desde el nombre del checkbox
                     selectedDaysData.push({
-                      userId: checkbox.name.split('-')[1],
-                      day: checkbox.value,
+                        userId: userId,
+                        day: day
                     });
-                  }
-                }
-           
-    </script>
+                });
+
+                // Convertir los datos a formato JSON
+                const jsonData = JSON.stringify(selectedDaysData);
+
+                // Realizar la petición AJAX
+                fetch('/CreateWithSelectedDays', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: jsonData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Respuesta del servidor:', data);
+                        // Manejar la respuesta del servidor si es necesario
+                        // Después de enviar el formulario, volvemos a inicializar los checkboxes marcados con anterioridad
+                        //initializeSelectedCheckboxes();
+                    })
+                    .catch(error => {
+                        console.error('Error al enviar la solicitud:', error);
+                        // Manejar el error si ocurre
+                    });
+            }
+        </script> *@
+
+
+   
+
 </div>
     
 </div>

@@ -424,3 +424,4 @@ C:\Temp\Proyects\VacationsDays5Adaptor\VacationsDays\obj\Debug\net6.0\refint\Vac
 C:\Temp\Proyects\VacationsDays5Adaptor\VacationsDays\obj\Debug\net6.0\VacationsDays.pdb
 C:\Temp\Proyects\VacationsDays5Adaptor\VacationsDays\obj\Debug\net6.0\VacationsDays.genruntimeconfig.cache
 C:\Temp\Proyects\VacationsDays5Adaptor\VacationsDays\obj\Debug\net6.0\ref\VacationsDays.dll
+C:\Temp\Proyects\VacationsDays5Adaptor\VacationsDays\obj\Debug\net6.0\VacationsDays.sourcelink.json
