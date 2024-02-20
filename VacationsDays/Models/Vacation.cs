@@ -56,9 +56,6 @@ namespace VacationsDays.Models
 
         public int? SelectedDays { get; set; }
 
-        //[NotMapped]
-        //public Dictionary<int, string> BlockedDays { get; set; }
-
         public string? BlokedJson { get; set; }
 
         

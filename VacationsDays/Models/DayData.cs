@@ -1,4 +1,10 @@
-﻿namespace VacationsDays.Models
+﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+
+namespace VacationsDays.Models
 {
     public class DayData
     {

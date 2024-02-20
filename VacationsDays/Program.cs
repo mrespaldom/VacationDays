@@ -13,7 +13,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("VacationConection"));
-    
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DayDataConection"));
+
 });
 //builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
 //    builder.Configuration.GetConnectionString("Defaultconnection")

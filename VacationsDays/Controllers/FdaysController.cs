@@ -13,8 +13,7 @@ namespace VacationsDays.Controllers
     public class FdaysController : Controller
     {
         private readonly ApplicationDbContext _db;
-        private object? bookedDates;
-
+       
         public FdaysController(ApplicationDbContext db)
         {
             _db = db;
@@ -125,39 +124,39 @@ namespace VacationsDays.Controllers
         [HttpPost("CreateWithSelectedDays")]
         public IActionResult CreateWithSelectedDays(List<SelectedDayData> selectedDays)
         {
-           // if (selectedDays != null && selectedDays.Any())
-            //{
+            if (selectedDays != null && selectedDays.Any())
+            {
                 foreach (var selectedDay in selectedDays)
                 {
-                    // Encontrar la Vacación correspondiente al UserId
+                    //Encontrar la Vacación correspondiente al UserId
                     Vacation obj = _db.Vacations.FirstOrDefault(v => v.UserId == selectedDay.UserId.ToString());
 
 
                     if (obj != null)
                     {
-                        // Serializar los días marcados a formato JSON
-                        var selectedDaysJson = JsonConvert.SerializeObject(selectedDays.Where(d => d.UserId.ToString() == obj.UserId).Select(d => d.Day).ToList());
+                       // Serializar los días marcados a formato JSON
+                       var selectedDaysJson = JsonConvert.SerializeObject(selectedDays.Where(d => d.UserId.ToString() == obj.UserId).Select(d => d.Day).ToList());
 
 
 
-                        // Asignar la cadena JSON al campo BlockedJson
+                        //Asignar la cadena JSON al campo BlockedJson
                         obj.BlokedJson = selectedDaysJson;
 
-                        // Calcular la suma de todos los días marcados para el usuario en el año respectivo
+                        //Calcular la suma de todos los días marcados para el usuario en el año respectivo
                         int bookedDays = selectedDays.Count;
 
-                        // Restar esta suma del total de días de vacaciones para obtener los días reservados
+                        //Restar esta suma del total de días de vacaciones para obtener los días reservados
                         int remainingDays = obj.TotalDays - bookedDays;
 
-                        // Asignar los valores calculados a las propiedades correspondientes del objeto Vacation
+                        //Asignar los valores calculados a las propiedades correspondientes del objeto Vacation
                         obj.BookedDays = bookedDays;
                         obj.RemainingDays = remainingDays;
 
-                        // Guardar los cambios en la base de datos
+                        //Guardar los cambios en la base de datos
                         _db.SaveChanges();
                     }
                 }
-         //   }
+            }
 
             TempData["success"] = "Vacation created successfully";
             return RedirectToAction("Index");

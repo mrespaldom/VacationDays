@@ -22,6 +22,33 @@ namespace VacationsDays.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("System.Collections.Generic.Dictionary<int, string>", b =>
+                {
+                    b.ToTable("Dictionary<int, string>");
+                });
+
+            modelBuilder.Entity("VacationsDays.Models.DayData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("DayOfYear")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsCheckedCH")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCheckedV")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DaysData");
+                });
+
             modelBuilder.Entity("VacationsDays.Models.Vacation", b =>
                 {
                     b.Property<int>("Id")
@@ -31,7 +58,6 @@ namespace VacationsDays.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("BlokedJson")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("BookedDays")
@@ -59,7 +85,7 @@ namespace VacationsDays.Migrations
                     b.Property<int?>("RemainingDays")
                         .HasColumnType("int");
 
-                    b.Property<int>("SelectedDays")
+                    b.Property<int?>("SelectedDays")
                         .HasColumnType("int");
 
                     b.Property<int>("TotalDays")
