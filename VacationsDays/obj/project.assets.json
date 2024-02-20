@@ -2243,11 +2243,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Temp\\Proyects\\VacationsDays5Adaptor\\VacationsDays\\VacationsDays.csproj",
+      "projectUniqueName": "C:\\Temp\\Proyects\\VacationsDays6Tables\\VacationsDays\\VacationsDays.csproj",
       "projectName": "VacationsDays",
-      "projectPath": "C:\\Temp\\Proyects\\VacationsDays5Adaptor\\VacationsDays\\VacationsDays.csproj",
+      "projectPath": "C:\\Temp\\Proyects\\VacationsDays6Tables\\VacationsDays\\VacationsDays.csproj",
       "packagesPath": "C:\\Users\\Augustin.Valente\\.nuget\\packages\\",
-      "outputPath": "C:\\Temp\\Proyects\\VacationsDays5Adaptor\\VacationsDays\\obj\\",
+      "outputPath": "C:\\Temp\\Proyects\\VacationsDays6Tables\\VacationsDays\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -22,11 +22,6 @@ namespace VacationsDays.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("System.Collections.Generic.Dictionary<int, string>", b =>
-                {
-                    b.ToTable("Dictionary<int, string>");
-                });
-
             modelBuilder.Entity("VacationsDays.Models.DayData", b =>
                 {
                     b.Property<int>("Id")

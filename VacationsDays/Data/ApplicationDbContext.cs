@@ -15,12 +15,12 @@ namespace VacationsDays.Data
 
             public DbSet<DayData> DaysData { get; set; }    
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Dictionary<int, string>>().HasNoKey();
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Dictionary<int, string>>().HasNoKey();
 
-            // Agrega otras configuraciones de modelos aquí si es necesario
-        }
+        //    // Agrega otras configuraciones de modelos aquí si es necesario
+        //}
 
     }
     

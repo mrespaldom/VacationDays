@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VacationsDays")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6dd1b62b6794853b271e964577942f17067dc24f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36f3c8dfd96527c86d93fb1b3a7cdd5fe04d6149")]
 [assembly: System.Reflection.AssemblyProductAttribute("VacationsDays")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VacationsDays")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
